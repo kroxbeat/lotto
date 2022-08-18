@@ -5,9 +5,7 @@ use rand::rngs::ThreadRng;
 
 #[derive(Debug)]
 pub struct Lotto {
-    nums: HashSet<u8>,
-    is_win: bool,
-    rand_gen: ThreadRng,
+    pub nums: HashSet<u8>,
 }
 
 impl Lotto {
@@ -15,18 +13,16 @@ impl Lotto {
     pub fn new() -> Self {
         Lotto {
             nums: HashSet::new(),
-            is_win: false,
-            rand_gen: thread_rng(),
         }
     }
 
     //랜덤 함수
-    fn gen_rand_num(&mut self) -> u8 {
-        self.rand_gen.gen_range((1..46)) as u8
+    fn gen_rand_num() -> u8 {
+        rand::thread_rng().gen_range(1..46) as u8
     }
 
     //nums 맴버에 수동으로 채우기
-    pub fn fill_manual(&mut self, param_nums: (u8, u8, u8, u8, u8, u8)) -> bool{
+    pub fn fill_manual(&mut self, param_nums: (u8, u8, u8, u8, u8, u8)) -> bool {
         let arr: [u8; 6] = [param_nums.0, param_nums.1, param_nums.2, param_nums.3, param_nums.4, param_nums.5];
         let nums_set: HashSet<u8> = HashSet::from(arr);
 
@@ -34,7 +30,7 @@ impl Lotto {
             6 => {
                 self.nums = nums_set;
                 true
-            },
+            }
             _ => false
         }
     }
@@ -42,8 +38,8 @@ impl Lotto {
     // nums 맴버에 랜덤수 채우기
     pub fn fill_rand_nums(&mut self) {
         while let 0..=5 = self.nums.len() {
-            let r_num = self.gen_rand_num();
-            debug!("r_rnum is {r_num}");
+            let r_num = Lotto::gen_rand_num();
+            //debug!("r_rnum is {r_num}");
             self.nums.insert(r_num);
         }
     }

@@ -1,7 +1,10 @@
-use log::{debug, info};
-//use crate::lotto
+extern crate core;
 
-pub mod simple_console;
+use log::{debug, info};
+use crate::lotto::Lotto;
+use crate::console::LottoConsole;
+
+pub mod console;
 pub mod lotto;
 
 fn main() {
@@ -9,15 +12,7 @@ fn main() {
     info!("main called");
     println!("Hello Lotto Generator");
 
-    let mut lotto1 = lotto::Lotto::new();
-    lotto1.fill_rand_nums();
-    debug!("{lotto1:?}");
-
-    let mut lotto2 = lotto::Lotto::new();
-    lotto2.fill_manual((1,2,3,4,5,6));
-    debug!("{lotto2:?}");
-
-    let result = lotto1.diff(&lotto2);
-    debug!("{result}");
+    let mut lotto_console = LottoConsole::new();
+    lotto_console.start();
 
 }
