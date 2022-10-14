@@ -47,6 +47,7 @@ impl Lotto {
     //다른 lotto 와 비교
     pub fn diff(&self, other: &Lotto) -> i8 {
         let diff_count = self.nums.difference(&other.nums).count() as i8;
-        (diff_count - 6).abs()
+        let x = (diff_count - 6).abs();
+        x
     }
 }
